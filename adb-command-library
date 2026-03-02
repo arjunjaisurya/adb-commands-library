@@ -1,0 +1,84 @@
+#1.Basic Connection Commands
+#Check if device is connected
+adb devices
+
+#Restart ADB server
+adb kill-server
+adb start-server
+
+#Connect over WiFi
+adb tcpip 5555
+adb connect <phone_ip>:5555
+
+#2.File Transfer Commands
+#Push file (Mac → Phone)
+adb push file.txt /sdcard/
+
+#Pull file (Phone → Mac)
+adb pull /sdcard/file.txt .
+
+#3.App Management
+#Install APK
+adb install app.apk
+
+#reinstall APK 
+adb install -r app.apk
+
+#Uninstall App
+adb uninstall com.example.app
+
+#List installed apps
+adb shell pm list packages
+
+#4.Open Shell (Most Powerful)
+adb shell
+
+#Check storage
+df
+
+#See running processes
+ps
+
+#Remove file
+rm filename
+
+#Make directory
+mkdir foldername
+
+#exit shell
+exit
+
+#5.Logs & Debugging
+See logs
+
+#Clear logs
+adb logcat -c
+
+#6.Screenshots & Screen Recording
+
+#Take screenshot
+adb shell screencap -p /sdcard/screen.png
+adb pull /sdcard/screen.png
+
+#Record screen
+adb shell screenrecord /sdcard/video.mp4
+
+#7.Device Info
+#Get device model
+adb shell getprop ro.product.model
+
+#Get Android version
+adb shell getprop ro.build.version.release
+
+#Reboot device
+adb reboot
+
+#Reboot to bootloader
+adb reboot bootloader
+
+#8.Advanced (Be Careful)
+#Grant permission
+adb shell pm grant com.example.app android.permission.CAMERA
+
+#Force stop app
+adb shell am force-stop com.example.app
