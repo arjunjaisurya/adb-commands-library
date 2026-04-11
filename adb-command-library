@@ -82,3 +82,42 @@ adb shell pm grant com.example.app android.permission.CAMERA
 
 #Force stop app
 adb shell am force-stop com.example.app
+
+#9.Screen Scraping / UI Inspection
+#Dump UI hierarchy (XML snapshot of all on-screen elements)
+adb shell uiautomator dump /sdcard/ui_dump.xml
+adb pull /sdcard/ui_dump.xml
+
+#Dump UI hierarchy and print directly to terminal
+adb shell uiautomator dump /dev/tty
+
+#Get text content of focused window
+adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'
+
+#Get all visible text from current screen via accessibility
+adb shell dumpsys accessibility
+
+#Get detailed info about current activity
+adb shell dumpsys activity top
+
+#Extract text from UI dump (after pulling xml)
+#grep -oP '(?<=text=")[^"]+' ui_dump.xml
+
+#Capture screen pixels as raw data (pipe to image tool)
+adb shell screencap -p /sdcard/screen.png
+adb pull /sdcard/screen.png
+
+#Get display size
+adb shell wm size
+
+#Get display density
+adb shell wm density
+
+#Simulate tap at coordinates (x, y)
+adb shell input tap 500 800
+
+#Simulate swipe (x1 y1 x2 y2 duration_ms)
+adb shell input swipe 300 800 300 200 500
+
+#Type text into focused field
+adb shell input text "hello world"
